@@ -6,4 +6,4 @@
 #SBATCH --qos=premium
 rm -rf ./logs/*
 module load deeplearning
-srun python -u slurm_trainer.py slurm
+srun python -u main.py
