@@ -9,8 +9,8 @@ import tensorflow as tf
 # In[2]:
 
 import sys
-# from nbfinder import NotebookFinder
-# sys.meta_path.append(NotebookFinder())
+#from nbfinder import NotebookFinder
+#sys.meta_path.append(NotebookFinder())
 
 
 # In[3]:
@@ -52,7 +52,7 @@ def make_model(x,y_):
     y_conv = tf.matmul(h_fc1, W_fc2) + b_fc2
 
     #loss: softmax followed by cross_entropy
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(y_conv,y_))
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_conv,labels=y_))
     
     #accuracy
     correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
@@ -70,8 +70,13 @@ def test():
 
 # In[9]:
 
-# if __name__ == "__main__":
-#     test()
+if __name__ == "__main__":
+    test()
+
+
+# In[10]:
+
+#! jupyter nbconvert --to script model.ipynb
 
 
 # In[ ]:
