@@ -1,24 +1,17 @@
 
-# coding: utf-8
 
-# In[1]:
 
 import tensorflow as tf
 
 
-# In[2]:
 
 import sys
-#from nbfinder import NotebookFinder
-#sys.meta_path.append(NotebookFinder())
 
 
-# In[3]:
 
 from util import weight_variable, bias_variable, conv2d, max_pool_2x2
 
 
-# In[7]:
 
 def make_model(x,y_):
     
@@ -52,7 +45,7 @@ def make_model(x,y_):
     y_conv = tf.matmul(h_fc1, W_fc2) + b_fc2
 
     #loss: softmax followed by cross_entropy
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_conv,labels=y_))
+    loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y_conv,labels=y_))
     
     #accuracy
     correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
@@ -60,7 +53,6 @@ def make_model(x,y_):
     return loss, accuracy
 
 
-# In[8]:
 
 def test():
     x = tf.placeholder(tf.float32, shape=[None, 28, 28,1])
@@ -68,18 +60,14 @@ def test():
     make_model(x,y_)
 
 
-# In[9]:
 
 if __name__ == "__main__":
     test()
 
 
-# In[10]:
-
-#! jupyter nbconvert --to script model.ipynb
 
 
-# In[ ]:
+
 
 
 

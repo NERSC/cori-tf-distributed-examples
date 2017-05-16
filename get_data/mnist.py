@@ -103,6 +103,11 @@ def load_tr_set(task_index, num_tasks, seed=3):
     
     return ims[slice_], lbls[slice_]
 
+def get_placeholders():
+    x = tf.placeholder(tf.float32, shape=[None, 28, 28,1])
+    y_ = tf.placeholder(tf.float32, shape=[None, 10])
+    return x,y_
+
 
 
 def shuffle_data(seed, data):
