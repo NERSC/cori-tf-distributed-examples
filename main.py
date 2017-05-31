@@ -1,10 +1,13 @@
 
+# coding: utf-8
 
+# In[1]:
 
 import tensorflow as tf
 import sys
 
 
+# In[2]:
 
 from models.resnet101 import make_model
 from get_data.dummy_imagenet import load_tr_set, get_shapes
@@ -14,6 +17,7 @@ import numpy as np
 import time
 
 
+# In[3]:
 
 def main(_):
     batch_size = 128
@@ -53,14 +57,18 @@ def main(_):
                 print "loss for task id %i is %8.2f" % (task_index, loss_)
 
 
+# In[4]:
 
 if __name__ == "__main__":
     tf.app.run(main=main)
 
 
+# In[1]:
+
+#! jupyter nbconvert --to script ./main.ipynb
 
 
-
+# In[ ]:
 
 
 

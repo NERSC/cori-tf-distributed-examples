@@ -1,21 +1,27 @@
 
+# coding: utf-8
 
+# In[11]:
 
 import tensorflow as tf
 import tensorflow.contrib.keras as keras
 
 
+# In[12]:
 
 from keras.layers import Conv2D, BatchNormalization, Activation, Input, MaxPooling2D, AveragePooling2D, Flatten, Dense
 from util import conv_block, identity_block
 
 
+# In[22]:
 
 num_classes = 1000
 
 
+# In[60]:
 
 def make_model(x_shape, batch_size):
+    y = tf.placeholder(dtype=tf.int32,shape=(batch_size,))# Input(dtype=tf.int32, shape=y_shape)
 
     img_input = Input(batch_shape= tuple( [batch_size] + list(x_shape)))
     bn_axis = 3
@@ -65,6 +71,7 @@ def make_model(x_shape, batch_size):
     return img_input, y, loss
 
 
+# In[ ]:
 
 
 
