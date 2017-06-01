@@ -1,8 +1,12 @@
 
+# coding: utf-8
 
+# In[ ]:
 
 import os
 import sys
+from nbfinder import NotebookFinder
+sys.meta_path.append(NotebookFinder())
 #get mnist
 
 import numpy as np
@@ -109,6 +113,7 @@ def get_placeholders():
     return x,y_
 
 
+# In[ ]:
 
 def shuffle_data(seed, data):
     rng =np.random.RandomState(seed)
@@ -116,4 +121,9 @@ def shuffle_data(seed, data):
     rng.shuffle(inds)
     data = data[inds]
     return data
+
+
+# In[ ]:
+
+#! jupyter nbconvert --to script mnist.ipynb
 

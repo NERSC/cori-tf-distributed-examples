@@ -54,16 +54,17 @@ def main(_):
                 slice_ = slice(start, stop)
                 batch = (ims[slice_], lbls[slice_])
                 _, step, loss_ = mon_sess.run([train_op, global_step, loss],feed_dict={x:batch[0], y: batch[1]})
-                print "loss for task id %i is %8.2f" % (task_index, loss_)
+                print "loss for task id %i is: " % (task_index)
+                print loss_
 
 
-# In[4]:
+# In[1]:
 
 if __name__ == "__main__":
     tf.app.run(main=main)
 
 
-# In[1]:
+# In[2]:
 
 #! jupyter nbconvert --to script ./main.ipynb
 

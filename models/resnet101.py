@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[11]:
+# In[3]:
 
 import tensorflow as tf
 import tensorflow.contrib.keras as keras
@@ -11,6 +11,8 @@ import tensorflow.contrib.keras as keras
 
 from keras.layers import Conv2D, BatchNormalization, Activation, Input, MaxPooling2D, AveragePooling2D, Flatten, Dense
 from util import conv_block, identity_block
+from keras import backend as K
+
 
 
 # In[22]:
@@ -21,6 +23,7 @@ num_classes = 1000
 # In[60]:
 
 def make_model(x_shape, batch_size):
+    K.set_learning_phase(1)
     y = tf.placeholder(dtype=tf.int32,shape=(batch_size,))# Input(dtype=tf.int32, shape=y_shape)
 
     img_input = Input(batch_shape= tuple( [batch_size] + list(x_shape)))
@@ -67,8 +70,14 @@ def make_model(x_shape, batch_size):
     x = Flatten()(x)
     x = Dense(num_classes, activation='softmax', name='fc1000')(x)
     
-    loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=x,labels=y)
+    loss = tf.reduce_mean(tf.nn.sparse_softmax_cross_entropy_with_logits(logits=x,labels=y))
+    
     return img_input, y, loss
+
+
+# In[2]:
+
+#! jupyter nbconvert --to script resnet101.ipynb
 
 
 # In[ ]:
