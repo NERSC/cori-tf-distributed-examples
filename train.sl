@@ -7,4 +7,4 @@
 #SBATCH --qos=premium
 #rm -rf ./logs/*
 module load deeplearning
-srun python -u main.py
+srun python -u main.py $@

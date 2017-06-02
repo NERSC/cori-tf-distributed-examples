@@ -1,12 +1,10 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[4]:
 
 import os
 import sys
-from nbfinder import NotebookFinder
-sys.meta_path.append(NotebookFinder())
 #get mnist
 
 import numpy as np
@@ -112,6 +110,11 @@ def get_placeholders():
     y_ = tf.placeholder(tf.float32, shape=[None, 10])
     return x,y_
 
+def get_shapes():
+    image_shape = (28,28,1)
+    label_shape = (10,)
+    return image_shape, label_shape
+
 
 # In[ ]:
 
@@ -123,7 +126,12 @@ def shuffle_data(seed, data):
     return data
 
 
-# In[ ]:
+# In[5]:
 
 #! jupyter nbconvert --to script mnist.ipynb
+
+
+# In[ ]:
+
+
 

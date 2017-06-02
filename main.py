@@ -10,11 +10,21 @@ import sys
 # In[2]:
 
 from models.resnet101 import make_model
-from get_data.dummy_imagenet import load_tr_set, get_shapes
+from configs import get_configs
 from slurm_tf_helper.setup_clusters import setup_slurm_cluster
 import os
 import numpy as np
 import time
+import importlib
+
+
+# In[4]:
+
+configs = get_configs()
+
+data_module = importlib.import_module("get_data." + configs["dataset"])
+
+load_tr_set, get_shapes = data_module.load_tr_set, data_module.get_shapes
 
 
 # In[3]:
@@ -64,7 +74,7 @@ if __name__ == "__main__":
     tf.app.run(main=main)
 
 
-# In[2]:
+# In[5]:
 
 #! jupyter nbconvert --to script ./main.ipynb
 
