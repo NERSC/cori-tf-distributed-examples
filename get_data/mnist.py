@@ -103,7 +103,7 @@ def load_tr_set(task_index, num_tasks, seed=3):
     print lbls.shape
     
     
-    return ims[slice_], lbls[slice_]
+    return ims[slice_], lbls[slice_], lbls.shape[0]
 
 def get_placeholders():
     x = tf.placeholder(tf.float32, shape=[None, 28, 28,1])
@@ -126,7 +126,7 @@ def shuffle_data(seed, data):
     return data
 
 
-# In[5]:
+# In[6]:
 
 #! jupyter nbconvert --to script mnist.ipynb
 
