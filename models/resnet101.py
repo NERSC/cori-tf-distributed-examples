@@ -1,13 +1,13 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 import tensorflow as tf
 import tensorflow.contrib.keras as keras
 
 
-# In[12]:
+# In[3]:
 
 from keras.layers import Conv2D, BatchNormalization, Activation, Input, MaxPooling2D, AveragePooling2D, Flatten, Dense
 from util import conv_block, identity_block
@@ -15,14 +15,9 @@ from keras import backend as K
 
 
 
-# In[22]:
-
-num_classes = 1000
-
-
 # In[60]:
 
-def make_model(x_shape, batch_size):
+def make_model(x_shape, batch_size, num_classes=10):
     K.set_learning_phase(1)
     y = tf.placeholder(dtype=tf.int32,shape=(batch_size,))# Input(dtype=tf.int32, shape=y_shape)
 
@@ -75,7 +70,7 @@ def make_model(x_shape, batch_size):
     return img_input, y, loss
 
 
-# In[2]:
+# In[4]:
 
 #! jupyter nbconvert --to script resnet101.ipynb
 

@@ -1,36 +1,40 @@
 
 # coding: utf-8
 
-# In[11]:
+# In[1]:
 
 import argparse
 
 
-# In[12]:
+# In[2]:
 
-configs = {"dataset": "dummy_imagenet", "parallelism": "async", "logdir": "./logs", "exp_name": "experiment"}
+configs = {"dataset": "cifar10", "logdir": "./logs", "batch_size": 128, "path_to_h5_file": None}
 
 
-# In[8]:
+# In[3]:
 
 def get_configs():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     for k,v in configs.iteritems():
-        parser.add_argument("--" + k,default=v, type=type(v))
+        if v:
+            type_ = type(v)
+        else:
+            type_ = str
+        parser.add_argument("--" + k,default=v, type=type_)
     args = parser.parse_args()
     configs.update(args.__dict__)
     return configs
     
 
 
-# In[ ]:
+# In[5]:
 
 if __name__ == "__main__":
     cfg = get_configs()
     print cfg
 
 
-# In[19]:
+# In[7]:
 
 #! jupyter nbconvert --to script configs.ipynb
 
