@@ -8,7 +8,7 @@ import argparse
 
 # In[2]:
 
-configs = {"dataset": "cifar10", "logdir": "./logs", "batch_size": 128, "path_to_h5_file": None}
+configs = {"dataset": "cifar10", "mode":"sync", "logdir": "./logs", "batch_size": 128, "path_to_h5_file": None}
 
 
 # In[3]:
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     print cfg
 
 
-# In[7]:
+# In[8]:
 
 #! jupyter nbconvert --to script configs.ipynb
 

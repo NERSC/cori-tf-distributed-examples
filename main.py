@@ -48,13 +48,23 @@ def main(_):
             
             global_step = tf.contrib.framework.get_or_create_global_step()
             opt = tf.train.AdamOptimizer(0.01)
+            
+            if configs["mode"] == "sync":
+                opt = tf.SyncReplicasOptimizer(opt, replicas_to_aggregate=num_tasks,
+                               total_num_replicas=num_tasks)
             train_op = opt.minimize(loss, global_step=global_step)
 
         
+
         
         
         #set up training ops
         hooks=[tf.train.StopAtStepHook(last_step=1000000)]
+        
+        if configs["mode"] == "sync":
+            hooks.append(opt.make_session_run_hook(is_chief=(task_index == 0)))
+            
+        
         with tf.train.MonitoredTrainingSession(is_chief=(task_index == 0),
                                  master=server.target,
                                  checkpoint_dir="./logs",
@@ -66,7 +76,7 @@ def main(_):
                 for ims,lbls in generator:
                     iteration_start = time.time()
                     _, step, loss_ = mon_sess.run([train_op, global_step, loss],feed_dict={x:ims, y: lbls})
-                
+                    print step
                     print "loss for task id %i is: %8.4f " % (task_index, loss_)
                     print "time for iteration for task %i, batch size %i is %5.2f" % (task_index, configs["batch_size"], time.time() - iteration_start)
                 
@@ -78,9 +88,9 @@ if __name__ == "__main__":
     tf.app.run(main=main)
 
 
-# In[3]:
+# In[ ]:
 
-#! jupyter nbconvert --to script ./main.ipynb
+get_ipython().system(u' jupyter nbconvert --to script ./main.ipynb')
 
 
 # In[ ]:
