@@ -90,7 +90,7 @@ if __name__ == "__main__":
 
 # In[ ]:
 
-get_ipython().system(u' jupyter nbconvert --to script ./main.ipynb')
+#get_ipython().system(u' jupyter nbconvert --to script ./main.ipynb')
 
 
 # In[ ]:
