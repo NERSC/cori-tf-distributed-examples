@@ -1,3 +1,0 @@
-[submodule "slurm_tf_helper"]
-	path = slurm_tf_helper
-	url = https://github.com/NERSC/slurm_tf_helper
