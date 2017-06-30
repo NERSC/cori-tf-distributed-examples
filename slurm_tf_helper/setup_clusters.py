@@ -1,21 +1,9 @@
-
-# coding: utf-8
-
-# In[1]:
-
 import tensorflow as tf
-
-
-# In[2]:
 
 import sys
 
 import os
 
-
-# In[5]:
-
-"""Works for tensorflow 0.12 for now"""
 def setup_slurm_cluster(num_ps=1):
     all_nodes = get_all_nodes()
 
@@ -112,14 +100,3 @@ def expand_nodelist(node_string):
 
 if __name__ == "__main__":
     cluster, server, task_index, num_tasks, job_name = setup_slurm_cluster(num_ps=1)
-
-
-# In[2]:
-
-#! jupyter nbconvert --to script setup_clusters.ipynb
-
-
-# In[ ]:
-
-
-

@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
 import sys
 import os
 from os import listdir, system
@@ -21,8 +16,6 @@ import h5py
 import importlib
 
 
-# In[4]:
-
 def normalize(arr,min_=None, max_=None, axis=(0,2,3)):
     if min_ is None or max_ is None:
         min_ = arr.min(axis=(0,2,3), keepdims=True)
@@ -37,8 +30,6 @@ def normalize(arr,min_=None, max_=None, axis=(0,2,3)):
     arr /= (range_)
     return arr
 
-
-# In[ ]:
 
 class ImGenerator(object):
     def __init__(self, batchfetcher, batch_size=128):
@@ -79,8 +70,6 @@ def h5_data_splitter(path_to_h5file, num_tasks, task_id, image_key="data", label
     return ims, lbls
     
 
-
-# In[3]:
 
 #Thanks to TensorFlow (https://github.com/tensorflow/tensorflow/blob/master/tensorflow/contrib/learn/python/learn/datasets/mnist.py)
 #for inspiration for this data structure
@@ -161,7 +150,7 @@ class BatchFetcher(object):
             labels_new_part = self._labels[start:end]
             
 
-            return np.concatenate((images_rest_part, images_new_part), axis=0),                    np.concatenate((labels_rest_part, labels_new_part), axis=0)
+            return np.concatenate((images_rest_part, images_new_part), axis=0),np.concatenate((labels_rest_part, labels_new_part), axis=0)
         else:
            
             self._index_in_epoch += batch_size
@@ -171,14 +160,5 @@ class BatchFetcher(object):
             #print images.shape
             #print labels.shape
             return images,labels
-
-
-# In[6]:
-
-#! jupyter nbconvert --to script util.ipynb
-
-
-# In[ ]:
-
 
 

@@ -20,9 +20,6 @@ def get_generator(num_tasks, task_id, batch_size=128, path_to_h5file=None):
     gen = ImGenerator(bf, batch_size=batch_size)
     return gen
 
-
-# In[7]:
-
 def get_num_classes():
     return 10
 
@@ -34,14 +31,3 @@ if __name__ == "__main__":
     print gen.im_shape
     for ims,lbls in gen:
         print ims.shape, lbls.shape
-
-
-# In[7]:
-
-#!jupyter nbconvert --to script cifar10.ipynb
-
-
-# In[ ]:
-
-
-
