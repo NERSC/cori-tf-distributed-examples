@@ -13,9 +13,10 @@ sbatch -N \<number of nodes\> -t \<time to run\> train.sl \<command line argumen
   
   --logdir LOGDIR (directory to store logs for Tensorboard)
   
-  --mode (async or sync)
+  --mode ("async" or "sync")
   
-  --dataset DATASET (cifar10)
+  --dataset ("cifar10")
   
   --path_to_h5_file (path to where the hdf5 file from download-and-convert-cifar-10.py is)
+  
   --batch_size
