@@ -14,14 +14,17 @@ sbatch -N \<number of nodes\> -t \<time to run\> train.sl \<command line argumen
 usage: main.py [-h] [-m {async,sync}] [-b BATCHSIZE] [-p PATH_TO_H5]
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -m {async,sync}, --mode {async,sync}
+  * -h, --help            show this help message and exit
+  
+  * -m {async,sync}, --mode {async,sync}
                         which mode of distributed training to use: "sync" or
                         "async" (default: sync)
-  -b BATCHSIZE, --batchsize BATCHSIZE
+                        
+  * -b BATCHSIZE, --batchsize BATCHSIZE
                         what batch size to use. That is, after each node gets
                         a chunk of the data, how much data each node should
                         process per iteration (default: 128)
-  -p PATH_TO_H5, --path_to_h5 PATH_TO_H5
+                        
+ * -p PATH_TO_H5, --path_to_h5 PATH_TO_H5
                         path to hdf5 file for training (default: /global/cscra
                         tch1/sd/racah/cifar10/cifar_10_caffe_hdf5/train.h5)
