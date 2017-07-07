@@ -6,6 +6,7 @@ sbatch -N \<number of nodes\> -t \<time to run\> train.sl \<command line argumen
 
 #### Running Interactively
 salloc -N \<number of nodes\> -t \<time to run\> -C \<haswell or knl\>
+
 bash train.sl \<command line arguments to main.py\>
 
 #### Command line arguments to main.py
