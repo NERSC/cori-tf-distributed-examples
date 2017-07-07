@@ -3,9 +3,6 @@ Scripts/Benchmarks for Running Tensorflow Distributed on Cori
 
 ### Running 
 
-#### Download Cifar10
-python get_data/download-and-convert-cifar-10.py
-
 #### Submit Job
 sbatch -N \<number of nodes\> -t \<time to run\> train.sl \<command line arguments to main.py\>
 

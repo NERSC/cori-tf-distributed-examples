@@ -83,7 +83,10 @@ def get_all_nodes():
     
 
 def expand_nodelist(node_string):
-    pref, suff  = node_string.split('[')
+    try:
+        pref, suff  = node_string.split('[')
+    except:
+        assert False, "Only one node allocated!"
 
     suff = suff. split(']')[0].split(',')
     nodes =[]

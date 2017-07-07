@@ -7,7 +7,8 @@ import os
 import numpy as np
 import time
 import importlib
-from get_data.util import h5_data_splitter, BatchFetcher, ImGenerator
+from get_data.util import get_data_generator
+from get_data.download_and_convert_cifar_10 import extract_cifar_data
 import argparse
 
 
@@ -19,18 +20,9 @@ parser.add_argument("-m", "--mode", default="sync", type=str,
 parser.add_argument("-b","--batchsize", default=128, type=int,
                     help="what batch size to use. That is, after each node gets a chunk of the data, how much data each node should process per iteration")
 parser.add_argument("-p", "--path_to_h5",help="path to hdf5 file for training",type=str,
-                    default="/global/cscratch1/sd/racah/cifar10/cifar_10_caffe_hdf5/train.h5")
+                    default="%s/cori-tf-distributed-examples-data/cifar10/cifar-10-batches-py/cifar_hdf5/train.h5" % os.environ["SCRATCH"])
 args = parser.parse_args()
 
-
-def get_generator(num_tasks, task_id, batch_size=128, path_to_h5=None):
-    if not path_to_h5:
-        assert False, "Downloading dataset not enabled at this point. Please specify path_to_h5file"
-    ims, lbls = h5_data_splitter(path_to_h5, num_tasks, task_id)
-    ims = np.transpose(ims,axes=(0,2,3,1))
-    bf = BatchFetcher(ims, lbls)
-    gen = ImGenerator(bf, batch_size=batch_size)
-    return gen
 
 
 def main(_):
@@ -45,7 +37,7 @@ def main(_):
         is_chief=(task_index == 0)
         
         #whatever you use to iterate over your data
-        generator = get_generator(num_tasks=num_tasks, 
+        generator = get_data_generator(num_tasks=num_tasks, 
                                   task_id=task_index, 
                                   batch_size=args.batchsize, 
                                   path_to_h5=args.path_to_h5)
@@ -62,7 +54,7 @@ def main(_):
             #global step that either gets updated after any node processes a batch (async) or when all nodes process a batch for a given iteration (sync)
             global_step = tf.contrib.framework.get_or_create_global_step()
             
-            opt = tf.train.AdamOptimizer(0.1)
+            opt = tf.train.AdamOptimizer(1.0)
             
             if args.mode == "sync":
                 #if syncm we make a data structure that will aggregate the gradients form all tasks (one task per node in thsi case)

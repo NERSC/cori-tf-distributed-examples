@@ -14,7 +14,14 @@ import random
 import collections
 import h5py
 import importlib
+from download_and_convert_cifar_10 import extract_cifar_data
 
+def get_data_generator(num_tasks, task_id,  path_to_h5, batch_size=128):
+    ims, lbls = h5_data_splitter(path_to_h5, num_tasks, task_id)
+    ims = np.transpose(ims,axes=(0,2,3,1))
+    bf = BatchFetcher(ims, lbls)
+    gen = ImGenerator(bf, batch_size=batch_size)
+    return gen
 
 def normalize(arr,min_=None, max_=None, axis=(0,2,3)):
     if min_ is None or max_ is None:
@@ -53,10 +60,6 @@ class ImGenerator(object):
             
         return ims, lbls
     
-
-
-# In[2]:
-
 def h5_data_splitter(path_to_h5file, num_tasks, task_id, image_key="data", label_key="label"):
     
     h5f = h5py.File(path_to_h5file)
