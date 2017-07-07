@@ -1,10 +1,12 @@
 # cori-tf-distributed-examples
 Scripts/Benchmarks for Running Tensorflow Distributed on Cori
-
-### Running 
-
-#### Submit Job
+### Running Code
+#### Running In Batch
 sbatch -N \<number of nodes\> -t \<time to run\> train.sl \<command line arguments to main.py\>
+
+#### Running Interactively
+salloc -N \<number of nodes\> -t \<time to run\> -C \<haswell or knl\>
+bash train.sl \<command line arguments to main.py\>
 
 #### Command line arguments to main.py
   
@@ -23,5 +25,4 @@ optional arguments:
                         process per iteration (default: 128)
                         
  * -p PATH_TO_H5, --path_to_h5 PATH_TO_H5
-                        path to hdf5 file for training (default: /global/cscra
-                        tch1/sd/racah/cifar10/cifar_10_caffe_hdf5/train.h5)
+                        path to hdf5 file for training (default: $SCRATCH/cifar10/cifar_10_caffe_hdf5/train.h5)

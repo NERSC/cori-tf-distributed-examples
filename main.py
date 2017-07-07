@@ -1,16 +1,5 @@
-import tensorflow as tf
-import sys
-from models.resnet_cifar import make_model
-from configs import get_configs
-from slurm_tf_helper.setup_clusters import setup_slurm_cluster
-import os
-import numpy as np
-import time
-import importlib
-from get_data.util import get_data_generator
-from get_data.download_and_convert_cifar_10 import extract_cifar_data
 import argparse
-
+import os
 
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument("-m", "--mode", default="sync", type=str,
@@ -22,6 +11,18 @@ parser.add_argument("-b","--batchsize", default=128, type=int,
 parser.add_argument("-p", "--path_to_h5",help="path to hdf5 file for training",type=str,
                     default="%s/cori-tf-distributed-examples-data/cifar10/cifar-10-batches-py/cifar_hdf5/train.h5" % os.environ["SCRATCH"])
 args = parser.parse_args()
+
+
+import tensorflow as tf
+import sys
+from models.resnet_cifar import make_model
+from slurm_tf_helper.setup_clusters import setup_slurm_cluster
+import numpy as np
+import time
+import importlib
+from get_data.util import get_data_generator
+
+
 
 
 
