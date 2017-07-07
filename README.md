@@ -8,12 +8,20 @@ sbatch -N \<number of nodes\> -t \<time to run\> train.sl \<command line argumen
 
 #### Command line arguments to main.py
   
-  --logdir LOGDIR (directory to store logs for Tensorboard)
+usage: main.py [-h] [-m {async,sync}] [-b BATCHSIZE] [-p PATH_TO_H5]
+
+optional arguments:
+  * -h, --help            show this help message and exit
   
-  --mode ("async" or "sync")
-  
-  --dataset ("cifar10")
-  
-  --path_to_h5_file (path to where the hdf5 file from download-and-convert-cifar-10.py is)
-  
-  --batch_size
+  * -m {async,sync}, --mode {async,sync}
+                        which mode of distributed training to use: "sync" or
+                        "async" (default: sync)
+                        
+  * -b BATCHSIZE, --batchsize BATCHSIZE
+                        what batch size to use. That is, after each node gets
+                        a chunk of the data, how much data each node should
+                        process per iteration (default: 128)
+                        
+ * -p PATH_TO_H5, --path_to_h5 PATH_TO_H5
+                        path to hdf5 file for training (default: /global/cscra
+                        tch1/sd/racah/cifar10/cifar_10_caffe_hdf5/train.h5)
